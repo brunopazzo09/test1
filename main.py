@@ -13,11 +13,8 @@ postcodes = {}
 
 with open(main_filename, 'r') as file:
     reader = csv.reader(file)
-    row_count = 0
 
     for row in reader:
-        row_count+=1
-
         t_transaction_unique_id=row[0]
         t_price=row[1]
         t_transfer_date=row[2]
@@ -94,9 +91,26 @@ for prefix, change in postcode_changes.items():
     prefix_only = prefix.split()[0]
     postcode_changes_prefix_only[prefix_only] = change
 
-#sort based on number of transactions
+
 sorted_postcodes = sorted(postcode_changes_prefix_only, key=postcode_changes_prefix_only.get, reverse=True)
 
 #print the postcodes with the highest increase in transactions
 for postcode_prefix in sorted_postcodes:
     print(f"Postcode Prefix: {postcode_prefix}, Increase in Transactions: {postcode_changes_prefix_only[postcode_prefix]}")
+
+
+latitudes=defaultdict(int)
+longitudes=defaultdict(int)
+
+with open(main_filename, 'r') as file:
+    reader = csv.reader(file)
+    next(reader)
+
+    for row in reader:
+        c_postcode=row[2]
+        t_longitude=row[7]
+        t_latitude=row[8]
+        latitudes[c_postcode]=t_latitude
+        longitudes[c_postcode]=t_longitude
+
+

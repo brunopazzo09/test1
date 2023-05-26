@@ -78,6 +78,8 @@ WHERE p.postcode = 'EC1A'
 
 -Which postcodes have seen the highest increase in transactions during the last 5 years? No need to do the analysis at the full postcode level; the first part is sufficient. Thus instead of e.g. SE13 5HA, consider only SE13.
 
-I do not have sufficient RAM to test this, however I have written the code necessary to do so and it should work, based on my testing with custom CSV files
+I do not have sufficient RAM to test this, however I have written the code necessary to do so and it should work, based on my testing with custom CSV files.
+
+-Can you come up with an indication of a ‘migration’ metric in the UK? Perhaps it would be best if you combined the postcode coordinates dataset for this exercise (url #6). Where is the ‘centre of gravity’ in terms of number of transactions of the population moving to every year? Where is the ‘centre of gravity’ in terms of value moving to? For now, consider that the ‘centre of gravity’ is a weighted average function, so for each year determine the weighted average of the coordinates based on number of transactions, or value. 
 
 
