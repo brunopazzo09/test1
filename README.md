@@ -1,6 +1,6 @@
 -There is no unique identifier for a property in the data. How would you approach this to come up with a column that can be used as a unique id for each property? Would you combine any columns for instance? Can you test your method that it returns unique values? Are there any issues? 
 
-To have an ID for each property and to make sure that it is unique i would combine the following columns: paon, saon, street, locality, town/city, district. In the code, this is done by concatenating the strings together. To test the uniqueness of properties I have created an array with all properties (for testing purposes I have used a smaller CSV file containing the first 5 000 entries of the 2013 csv file and the first 5000 entries of the 2018 csv file) and then I have compared its length to set(array): if the length of the set is smaller than the length of the normal array (non-unique data), it means that some properties in the array are duplicates.
+To have an ID for each property and to make sure that it is unique i would combine the following columns: paon, saon, street, locality, town/city, district. In the code, this is done by concatenating the strings together. To test the uniqueness of properties I have created an array with all properties (in this case i used half of the 2013 csv file and half of the 2018 csv file) and then I have compared its length to set(array): if the length of the set is smaller than the length of the normal array (non-unique data), it means that some properties in the array are duplicates.
 
 
 -Once you have defined a property unique id (unfortunately this doesn’t exist in the data so it needs to be defined by you), how would you store the data in your SQL database? What table structure would you use? 
@@ -59,7 +59,7 @@ WHERE p.postcode = 'EC1A'
         "Number of properties sold in the postcode ST10 4BS: 2"
         
 
-    Given a transaction_id, return which property it refers to. Test with {7C2D0701-0253-4963-E053-6B04A8C07B97}. Does it return a property in Cornwall?
+   Given a transaction_id, return which property it refers to. Test with {7C2D0701-0253-4963-E053-6B04A8C07B97}. Does it return a property in Cornwall?
         Since I have used a dictionary data type indexed with transaction IDs to store transactions, I find it simpler to use "transactions[id].property" to see the property referred by the transaction ID.
         Testing with the given transaction ID (I had to use the 2018.csv file since this transaction appears only in that file) it prints:
         requested property:
@@ -74,10 +74,6 @@ WHERE p.postcode = 'EC1A'
             Postcode: TR27 6EY
             County: CORNWALL
         
-        which is correct.
+   which is correct.
 
 -Which postcodes have seen the highest increase in transactions during the last 5 years? No need to do the analysis at the full postcode level; the first part is sufficient. Thus instead of e.g. SE13 5HA, consider only SE13.
-
-
-        
-
