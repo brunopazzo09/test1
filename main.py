@@ -67,6 +67,8 @@ except KeyError:
 
 postcode_transactions = defaultdict(int)
 previous_counts = defaultdict(int)
+postcode_changes = {}
+postcode_changes_prefix_only = {}
 
 # Calculate the transaction counts for each postcode prefix
 for transaction in transactions.values():
@@ -82,12 +84,19 @@ for transaction in transactions.values():
         else:
             previous_counts[postcode_prefix] += 1
 
+#calculate the difference between transactions in the past 5 years and transaction before 5 years ago to determine which postcodes have seen the highest increase in transactions
+for prefix, count in postcode_transactions.items():
+    previous_count = previous_counts[prefix]
+    change = count - previous_count
+    postcode_changes[prefix] = change
 
-postcode_changes = {prefix: count - previous_counts[prefix] for prefix, count in postcode_transactions.items()}
-postcode_changes_prefix_only = {prefix.split()[0]: change for prefix, change in postcode_changes.items()}
+for prefix, change in postcode_changes.items():
+    prefix_only = prefix.split()[0]
+    postcode_changes_prefix_only[prefix_only] = change
 
+#sort based on number of transactions
 sorted_postcodes = sorted(postcode_changes_prefix_only, key=postcode_changes_prefix_only.get, reverse=True)
 
-# Print the postcodes with the highest increase in transactions
+#print the postcodes with the highest increase in transactions
 for postcode_prefix in sorted_postcodes:
     print(f"Postcode Prefix: {postcode_prefix}, Increase in Transactions: {postcode_changes_prefix_only[postcode_prefix]}")
